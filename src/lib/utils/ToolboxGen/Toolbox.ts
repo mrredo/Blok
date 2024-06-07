@@ -31,7 +31,6 @@ export default class Toolbox {
 			workspace.registerToolboxCategoryCallback(catKey, this.callbackCategory[catKey])
 		}
 		for (const otherKey of Object.keys(this.callbackOther)) {
-			console.log(otherKey)
 			workspace.registerButtonCallback(otherKey, this.callbackOther[otherKey])
 		}
 	}

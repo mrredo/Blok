@@ -24,7 +24,6 @@ const blocks: BlockDefinition[] = [
 		helpUrl:
 			`https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT`,
 		code: (args) => {
-			console.log(args)
 			let code = `if(${args.operand === ""? "false" : args.operand}) {
 	${args.if}
 }`;

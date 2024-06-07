@@ -12,6 +12,8 @@
 	import { warnings } from "$lib/utils/BlockGen/Warnings/WarningsList";
 	import { imports, wipeImports } from "$lib/utils/BlockGen/Blocks/importsList";
 	import type Toolbox from "$lib/utils/ToolboxGen/Toolbox";
+	import BlockRecord from "$lib/utils/BlockGen/Blocks/BlockRecord";
+	import loadBlockRecord from "$lib/utils/helpers/loadBlockRecord";
 
 	export let workspace: Blockly.WorkspaceSvg;
 	export let options: typeof OPTIONS;
@@ -23,7 +25,8 @@
 	});
 
 	onMount(async() => {
-        await loadBlocks();
+        await loadBlockRecord();
+		await loadBlocks()
         workspace = Blockly.inject("blocklyDiv", { ...options, toolbox: toolboxJson });
 		toolbox.registerCallbacks(workspace)
         // workspace.refreshToolboxSelection();

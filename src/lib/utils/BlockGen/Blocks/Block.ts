@@ -250,7 +250,6 @@ export default class Block {
 			}
 			return output ? [code(args, blockClass), Order.NONE] : code(args, blockClass);
 		};
-		BlockRecord[blockDef.type] = this._blockDefinition;
 	}
 
 

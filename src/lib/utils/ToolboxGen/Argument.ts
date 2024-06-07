@@ -6,7 +6,6 @@ import type ValueInput from "../BlockGen/Inputs/ValueInput"
 
 export function generateShadowInputs(args: BaseInput[]): Record<string, unknown> {
     let fields: Record<string, unknown>  = {}
-    console.log(BlockRecord)
     for(const arg1 of args) {
         if(!arg1.type && arg1.inputType === "value_input") continue
         const arg = arg1 as ValueInput
@@ -58,7 +57,6 @@ export function generateShadowInputs(args: BaseInput[]): Record<string, unknown>
                         fields: fillInputs(arg)
                     }
                 }
-
                 fields[arg.name] = shadow
                 break;
         }
@@ -69,15 +67,20 @@ function fillInputs(arg1: BaseInput): Record<string, unknown> {
     const mainArg = arg1 as ValueInput
     let fields: Record<string, unknown> = {}
     let shadowBlock = BlockRecord[mainArg.shadowBlockType] as DefBlock
+    console.log(Object.keys(BlockRecord))
     if(shadowBlock && shadowBlock.args) {
         for(let i = 0; i<shadowBlock.args?.length; i++) {
             if(shadowBlock.args[i].inputType !== "value_input") continue
 
+            const input = shadowBlock.args[i] as ValueInput
+            fields[input.name] = generateShadow(input)
         }
     }
 
     return fields
 }
-function generateShadow(arg: ValueInput) {
-
+function generateShadow(arg: ValueInput): unknown {
+    return {
+        type: arg.shadowBlockType
+    }
 }

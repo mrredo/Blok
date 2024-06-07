@@ -9,6 +9,8 @@
 	import Toolbox from "$lib/utils/ToolboxGen/Toolbox";
 	import getLocalDB from "$lib/utils/localDB/manager";
 	import { onMount } from "svelte";
+	import loadBlockRecord from "$lib/utils/helpers/loadBlockRecord";
+	import loadBlocks from "$lib/utils/helpers/loadBlocks";
 
 	const localDB = getLocalDB();
 
@@ -30,6 +32,7 @@
 	};
 
 	onMount(async() => {
+
 		toolbox = await new Toolbox();
 		toolboxJson = await toolbox.generate();
 
