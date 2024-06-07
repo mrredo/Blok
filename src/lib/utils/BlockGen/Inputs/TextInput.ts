@@ -12,7 +12,7 @@ export default class TextInput extends BaseInput {
 	private readonly _text: string;
 
 	constructor(name: string, defaultValue: string) {
-		super(name);
+		super(name, "text_input");
 
 		this.setMethod(this.getDefinition);
 		super.setName(name);

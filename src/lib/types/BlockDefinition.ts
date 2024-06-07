@@ -7,37 +7,38 @@ import type Placeholder from "$lib/utils/ToolboxGen/Placeholder";
 import {FlyoutButton} from "blockly";
 
 export type Argument = BaseInput;
+export interface DefBlock {
+	id: string; // This is the "type" of the block
+	label?: false; // To see if the definition is a label or not
+	text: string; // This is "message0"
+	output?: BlockType | string;
+	shape: BlockShape; // The block shape
+	args?: Argument[]; // This is "args0"
+	warnings?: Warning[];
+	placeholders?: Placeholder<unknown>[];
+	inline: boolean; // This is "inputsInline"
+	colour: string;
+	tooltip: string;
+	helpUrl: string;
+	code: (args: Record<string, string | string[]>, block: Block) => string;
 
-export type BlockDefinition =
-	| {
-			id: string; // This is the "type" of the block
-			label?: false; // To see if the definition is a label or not
-			text: string; // This is "message0"
-			output?: BlockType;
-			shape: BlockShape; // The block shape
-			args?: Argument[]; // This is "args0"
-			warnings?: Warning[];
-			placeholders?: Placeholder<unknown>[];
-			inline: boolean; // This is "inputsInline"
-			colour: string;
-			tooltip: string;
-			helpUrl: string;
-			code: (args: Record<string, string | string[]>, block: Block) => string;
+	mutator?: Mutator;
+	hidden?: boolean;
+	imports?: `${string}@${string}`[];
+	shadow?: boolean; // whether to autofill all inputs with shadow blocks
 
-			mutator?: Mutator;
-			hidden?: boolean;
-			imports?: `${string}@${string}`[];
-	  }
-	| {
-			label: true;
-			text: string;
-	  } |
-	{
-		kind: "button";
-		text: string;
-		callbackKey: string;
-		callback: (p1: FlyoutButton) => void;
-	};
+}
+export interface  DefLabel {
+	label: true;
+	text: string;
+}
+export interface DefButton {
+	kind: "button";
+	text: string;
+	callbackKey: string;
+	callback: (p1: FlyoutButton) => void;
+}
+export type BlockDefinition = DefBlock | DefLabel | DefButton;
 
 export interface MutatorBlock  {
 	// What inputs it adds to the block

@@ -27,6 +27,7 @@ import {getInputValue} from "$lib/utils/helpers/getInputValue";
 
 import { addImport } from "$lib/utils/BlockGen/Blocks/importsList";
 import type Warning from "../Warnings/Warning";
+import BlockRecord from "./BlockRecord";
 
 const { javascriptGenerator, Order } = pkg;
 
@@ -249,6 +250,7 @@ export default class Block {
 			}
 			return output ? [code(args, blockClass), Order.NONE] : code(args, blockClass);
 		};
+		BlockRecord[blockDef.type] = this._blockDefinition;
 	}
 
 

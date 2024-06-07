@@ -1,6 +1,7 @@
 import type { BlockDefinition } from "$lib/types/BlockDefinition";
 import type { FlyoutDefinition, ToolboxDefinition, ToolboxItemInfo } from "blockly/core/utils/toolbox";
 import Blockly from "blockly/core";
+import { generateShadowInputs } from "./Argument";
 
 export default class Toolbox {
 	// eslint-disable-next-line no-use-before-define
@@ -124,7 +125,13 @@ export default class Toolbox {
 							inputs[data.argName]["block"]["fields"][key] = value;
 						}
 					}
-
+					if(blockDef.shadow) {
+						let shadowInputs = generateShadowInputs(blockDef.args);
+						for(const inputKey in shadowInputs) {
+							const input = shadowInputs[inputKey];
+							inputs[inputKey] = input 
+						}
+					}					
 					blockContents.push(
 						blockDef.label
 							? { kind: "label", text: blockDef.text }

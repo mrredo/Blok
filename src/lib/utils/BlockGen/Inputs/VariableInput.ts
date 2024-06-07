@@ -14,7 +14,7 @@ export default class VariableInput extends BaseInput {
 	private readonly _opt_variableTypes?: string[];
 
 	constructor(name: string, variable: string, opt_defaultType?: string, opt_variableTypes?: string[]) {
-		super(name);
+		super(name, "variable_input");
 
 		this.setMethod(this.getDefinition);
 		super.setName(name);

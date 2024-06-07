@@ -50,7 +50,7 @@
 				console.info("Warnings", warnings);
 			}
 		}
-		workspace.addChangeListener(updateCode);
+		workspace.addChangeListener(updateCode)
 
 	});
 </script>

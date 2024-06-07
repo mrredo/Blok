@@ -21,7 +21,7 @@ export default class DropdownInput extends BaseInput {
 	private _dropdownType: DropdownType;
 
 	constructor(name: string, dropdownType: DropdownType, options: Record<string, string>) {
-		super(name);
+		super(name, "dropdown_input");
 		this.setMethod(this.getDefinition);
 
 		super.setName(name);

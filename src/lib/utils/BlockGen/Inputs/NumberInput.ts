@@ -13,7 +13,7 @@ export default class NumberInput extends BaseInput {
 		defaultValue: number,
 		settings?: { min?: number; max?: number; precision?: number }
 	) {
-		super(name);
+		super(name, "number_input");
 
 		this.setMethod(this.getDefinition);
 		super.setName(name);
@@ -29,5 +29,6 @@ export default class NumberInput extends BaseInput {
 			...this._settings
 		};
 	}
+
 
 }

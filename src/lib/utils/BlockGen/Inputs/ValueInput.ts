@@ -15,15 +15,13 @@ interface ValueInputJSON {
  * @extends {BaseInput}
  */
 export default class ValueInput extends BaseInput {
-	private readonly _type: BlockType[];
-
-	constructor(name: string, type: BlockType | BlockType[]) {
-		super(name);
+	private _shadowBlockType: string
+	constructor(name: string, type: BlockType | BlockType[] | string | string[], opt_shadowBlockType?: string) {
+		super(name, "value_input", type);
 
 		this.setMethod(this.getDefinition);
 		super.setName(name);
-
-		this._type = [type].flat();
+		this._shadowBlockType = opt_shadowBlockType ?? ""
 	}
 
 	/**
@@ -38,12 +36,14 @@ export default class ValueInput extends BaseInput {
 			name: super.name
 		};
 
-		const filtered = argFilter(this._type);
+		const filtered = argFilter(super.type as BlockType[]);
 		// We return without the "check" if we have no types :)
 		if (filtered.length === 0) return result;
 
 		result.check = [...filtered];
 		return result;
 	}
-
+	public get shadowBlockType() {
+		return this._shadowBlockType
+	}
 }

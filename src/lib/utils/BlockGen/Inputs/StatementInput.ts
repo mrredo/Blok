@@ -16,7 +16,7 @@ export default class StatementInput extends BaseInput {
 
 
 	constructor(name: string) {
-		super(name);
+		super(name, "statement_input");
 
 		this.setMethod(this.getDefinition);
 		super.setName(name);

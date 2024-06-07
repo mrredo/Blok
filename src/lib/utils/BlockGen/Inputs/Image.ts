@@ -15,7 +15,7 @@ export default class Image extends BaseInput {
 	 * @memberof NumberInput
 	 */
 	constructor(src: string, settings: { alt: string; width: number; height: number }) {
-		super();
+		super(undefined, "image_input");
 
 		this.setMethod(this.getDefinition);
 		this._src = src;
