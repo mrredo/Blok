@@ -11,6 +11,10 @@
 	import { onMount } from "svelte";
 	import loadBlockRecord from "$lib/utils/helpers/loadBlockRecord";
 	import loadBlocks from "$lib/utils/helpers/loadBlocks";
+	import type { BlockDefinition } from "blockly/core/blocks";
+	import type { DefBlock } from "$lib/types/BlockDefinition";
+	import BlockRecord from "$lib/utils/BlockGen/Blocks/BlockRecord";
+
 
 	const localDB = getLocalDB();
 
@@ -19,7 +23,6 @@
 	let toolbox: Toolbox;
 	let currentFile: string;
 	let discodesWorkspaceID: string;
-
 	const saveWorkspace = (currentFile: string) => {
 		localDB.saveBlocklyInFile(
 			currentFile,
@@ -32,16 +35,20 @@
 	};
 
 	onMount(async() => {
+		await loadBlockRecord()
 
-		toolbox = await new Toolbox();
+
+		
+			toolbox = await new Toolbox();
 		toolboxJson = await toolbox.generate();
-
+		console.log(3)
 		discodesWorkspaceID = $page.url.searchParams.get("id") || "1";
 		const discodesWorksapce = localDB.getWorkspaceByID(discodesWorkspaceID);
 
 		if (!discodesWorksapce) return;
 
 		currentFile = discodesWorksapce.lastOpened;
+
 	});
 </script>
 
@@ -58,4 +65,4 @@
 	}}>LOAD</button
 >
 <Warnings bind:workspace />
-<Workspace bind:workspace options={OPTIONS} bind:toolbox={toolbox} bind:toolboxJson={toolboxJson} />
+<Workspace bind:workspace options={OPTIONS}  bind:toolbox={toolbox} bind:toolboxJson={toolboxJson} />

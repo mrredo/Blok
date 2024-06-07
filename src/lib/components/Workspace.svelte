@@ -12,8 +12,9 @@
 	import { warnings } from "$lib/utils/BlockGen/Warnings/WarningsList";
 	import { imports, wipeImports } from "$lib/utils/BlockGen/Blocks/importsList";
 	import type Toolbox from "$lib/utils/ToolboxGen/Toolbox";
-	import BlockRecord from "$lib/utils/BlockGen/Blocks/BlockRecord";
 	import loadBlockRecord from "$lib/utils/helpers/loadBlockRecord";
+	import type { DefBlock } from "$lib/types/BlockDefinition";
+	import BlockRecord from "$lib/utils/BlockGen/Blocks/BlockRecord";
 
 	export let workspace: Blockly.WorkspaceSvg;
 	export let options: typeof OPTIONS;
@@ -25,10 +26,16 @@
 	});
 
 	onMount(async() => {
-        await loadBlockRecord();
+		await loadBlockRecord()
+		await loadBlockRecord()
+
+console.log(1)
+        // await loadBlockRecord();
 		await loadBlocks()
-        workspace = Blockly.inject("blocklyDiv", { ...options, toolbox: toolboxJson });
+		console.log(2)
+			workspace = Blockly.inject("blocklyDiv", { ...options, toolbox: toolboxJson });
 		toolbox.registerCallbacks(workspace)
+		
         // workspace.refreshToolboxSelection();
 		// Only console log the code and warnings when debug mode is enabled.
 		const supportedEvents = new Set([
@@ -54,6 +61,7 @@
 			}
 		}
 		workspace.addChangeListener(updateCode)
+        
 
 	});
 </script>
