@@ -1,7 +1,10 @@
-import type { BlockDefinition } from "$lib/types/BlockDefinition";
+import type { BlockDefinition, DefBlock } from "$lib/types/BlockDefinition";
 import type { FlyoutDefinition, ToolboxDefinition, ToolboxItemInfo } from "blockly/core/utils/toolbox";
 import Blockly from "blockly/core";
 import { generateShadowInputs } from "./Argument";
+import BlockRecord from "../BlockGen/Blocks/BlockRecord";
+import loadBlockRecord from "../helpers/loadBlockRecord";
+import Block from "../BlockGen/Blocks/Block";
 
 export default class Toolbox {
 	// eslint-disable-next-line no-use-before-define
@@ -42,7 +45,30 @@ export default class Toolbox {
 		// eslint-disable-next-line
 		const structure: { [key: string]: any } = {};
 
+		//Code for registering blocks 
+		// for (const path in files) {
+		// 	const module = await files[path]();
+	 	// 	// Get all the blocks from the files
+		//  	// @ts-expect-error Module is undefined and the red color pisses me off
+		// 	const blocksArray: BlockDefinition[] = module.default.blocks as BlockDefinition[];
+
+		
+		// 	for (const blockDef of blocksArray) {
+		// 		if ((blockDef as DefBlock).id) {
+		// 			const blDef = blockDef as DefBlock;
+		// 			BlockRecord[blDef.id] = blockDef;
+		// 		}
+		// 	}
+		// }
+		// for (const blockDefKey of Object.keys(BlockRecord)) {
+		// 	const blockDef = BlockRecord[blockDefKey]
+		// 	const block = new Block(blockDef);
+		// 	block.generate();
+		// }
+
+
 		for (const path in files) {
+			
 			const filesInDir = this.filterPaths(path, directories);
 			const mainParent = path.split("/").filter((val) => val !== "..")[1];
 

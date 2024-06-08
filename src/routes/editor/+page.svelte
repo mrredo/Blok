@@ -35,12 +35,14 @@
 	};
 
 	onMount(async() => {
+		
 		await loadBlockRecord()
 
 
 		
 			toolbox = await new Toolbox();
 		toolboxJson = await toolbox.generate();
+		console.log(JSON.stringify(toolboxJson))
 		console.log(3)
 		discodesWorkspaceID = $page.url.searchParams.get("id") || "1";
 		const discodesWorksapce = localDB.getWorkspaceByID(discodesWorkspaceID);

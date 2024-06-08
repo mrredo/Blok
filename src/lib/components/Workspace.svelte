@@ -28,10 +28,10 @@
 	onMount(async() => {
 		await loadBlockRecord()
 		await loadBlockRecord()
-
+		await loadBlocks()
 console.log(1)
         // await loadBlockRecord();
-		await loadBlocks()
+		// await loadBlocks()
 		console.log(2)
 			workspace = Blockly.inject("blocklyDiv", { ...options, toolbox: toolboxJson });
 		toolbox.registerCallbacks(workspace)

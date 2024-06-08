@@ -67,7 +67,6 @@ function fillInputs(arg1: BaseInput): Record<string, unknown> {
     const mainArg = arg1 as ValueInput
     let fields: Record<string, unknown> = {}
     let shadowBlock = BlockRecord[mainArg.shadowBlockType] as DefBlock
-    console.log(Object.keys(BlockRecord))
     if(shadowBlock && shadowBlock.args) {
         for(let i = 0; i<shadowBlock.args?.length; i++) {
             if(shadowBlock.args[i].inputType !== "value_input") continue
