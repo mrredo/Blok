@@ -49,12 +49,29 @@ export function generateShadowInputs(args: BaseInput[]): Record<string, unknown>
             }
 
             break;
+            case BlockType.Boolean:
+                if(arg.shadowBlockType) {
+                    fields[arg.name] = {
+                        block: {
+                            type:  arg.shadowBlockType,
+                        }   
+                    }
+                } else {
+                    fields[arg.name] = {
+                        block: {
+                            type: "values",
+                        }   
+                    }
+                }
+    
             default:
                 if(arg.shadowBlockType === "") break;
+                
                 const shadow = {
                     block: {
                         type: arg.shadowBlockType,
-                        fields: fillInputs(arg)
+                        //fields are removed since Blockly doesnt support making shadows for shadow blocks
+                        // fields: fillInputs(arg)
                     }
                 }
                 fields[arg.name] = shadow
@@ -68,7 +85,9 @@ function fillInputs(arg1: BaseInput): Record<string, unknown> {
     let fields: Record<string, unknown> = {}
     let shadowBlock = BlockRecord[mainArg.shadowBlockType] as DefBlock
     if(shadowBlock && shadowBlock.args) {
+        console.log(1)
         for(let i = 0; i<shadowBlock.args?.length; i++) {
+            console.log(2, shadowBlock.args[i].inputType)
             if(shadowBlock.args[i].inputType !== "value_input") continue
 
             const input = shadowBlock.args[i] as ValueInput

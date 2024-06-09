@@ -117,10 +117,9 @@ const blocks: BlockDefinition[] = [
 	},
 	{
 		id: "shadow_test",
-		text: "shadowBlock test \n{TEXT}\n{NUM}\n{CUSTOM}\n{CUSTOM2}",
+		text: "shadowBlock test \n{TEXT}\n{NUM}\n{BOOL}\n{CUSTOM}\n{CUSTOM2}",
 		shape: BlockShape.Value,
 		output: "lol",
-		shadow: true,
 		inline: true,
 		colour: rgbToHex(91, 128, 165),
 		tooltip: "Returns the opposite of the input",
@@ -129,10 +128,13 @@ const blocks: BlockDefinition[] = [
 		code: () => {
 			return "bob";
 		},
+		shadow: true,
+
 		args: [
 			new ValueInput("TEXT", BlockType.String),
-
 			new ValueInput("NUM", BlockType.Number),
+			new ValueInput("BOOL",BlockType.Boolean),
+			
 			new ValueInput("CUSTOM",BlockType.Boolean, "not"),
 			new ValueInput("CUSTOM2", "lol", "shadow_test"),
 

@@ -11,19 +11,14 @@
 		await loadBlockRecord()
 		await loadBlocks()
 
-		console.log(1)
 		let toolbox = await new Toolbox();
-		console.log(2)
 
 		let toolboxJson = await toolbox.generate();
-		console.log(3)
 		let workspace = Blockly.inject("blocklyDiv", {
 			...OPTIONS,
 			toolbox: toolboxJson
 		});
-		console.log(4)
 		toolbox.registerCallbacks(workspace)
-		console.log(5)
 	});
 </script>
 
